@@ -1,21 +1,6 @@
 <?php
-// koneksi ke database
-$con = mysqli_connect("localhost", "root", "", "phpdasar");
-
-//ambil data dari tabel mahasiswa / query data mahasiswa
-$result = mysqli_query($con, "SELECT * FROM mahasiswa");
-if (!$result) {
-    echo  mysql_error($con);
-}
-
-// ambil data (fetch) mahasiswa dari object result
-// mysqli_fetch_row() // mengembalikan array numerik
-// mysqli_fetch_assoc() // mengembalikan array associative
-// mysqli_fetch_array() // mengembalikan keduanya
-// mysqli_fetch_object() // mengembalikan object
-
-$mhs = mysqli_fetch_row($result);
-var_dump($mhs);
+require 'functions.php';
+$mahasiswa = query("SELECT * FROM mahasiswa");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,18 +23,22 @@ var_dump($mhs);
        <th>Jurusan</th>
     </tr>
 
+    <?php $i = 1; ?>
+    <?php foreach ($mahasiswa as $mhs) : ?>
     <tr>
-        <td>1</td>
+        <td><?= $i; ?></td>
         <td>
             <a href="">Ubah</a> |
             <a href="">Hapus</a>
         </td>
-        <td><img src="img/ririn.jpg" width="50" height="50" alt=""></td>
-        <td>090100</td>
-        <td>Ririn Dwi Aryanti</td>
-        <td>ririn@gmail.com</td>
-        <td>Manajemen Informatika</td>
+        <td><img src="img/<?= $mhs['gambar']; ?>" width="50" height="50" alt=""></td>
+        <td><?= $mhs["nim"]; ?></td>
+        <td><?= $mhs["nama"]; ?></td>
+        <td><?= $mhs["email"]; ?></td>
+        <td><?= $mhs["jurusan"]; ?></td>
     </tr>
+    <?php $i++; ?>
+    <?php endforeach; ?>
 </table>
 </body>
 </html>
