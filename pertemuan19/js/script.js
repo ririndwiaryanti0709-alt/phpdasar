@@ -1,3 +1,4 @@
+// LIVE SEARCH menggunakan ajax
 // ambil elemen elemen yang dibutuhkan
 var keyword = document.getElementById('keyword');
 var tombolCari = document.getElementById('tombol-cari');
